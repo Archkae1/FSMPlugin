@@ -1,0 +1,5 @@
+public interface ITemplateState
+{
+    void Enter();
+    void Exit();
+}

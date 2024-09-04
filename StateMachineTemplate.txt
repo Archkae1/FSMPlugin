@@ -1,0 +1,30 @@
+using System.Collections.Generic;
+using System;
+
+public class TemplateStateMachine
+{
+    private Dictionary<Type, ITemplateState> _states;
+    private ITemplateState _currentState;
+    private Type _currentTypeOfState;
+
+    public Type currentTypeOfState { get { return _currentTypeOfState; } }
+
+    public TemplateStateMachine()
+    {
+        _states = new Dictionary<Type, ITemplateState>()
+        {
+
+        };
+    }
+
+    public void Enter<TState>() where TState : ITemplateState
+    {
+        if (_states.TryGetValue(typeof(TState), out ITemplateState state))
+        {
+            _currentState?.Exit();
+            _currentState = state;
+            _currentTypeOfState = typeof(TState);
+            _currentState.Enter();
+        }
+    }
+}

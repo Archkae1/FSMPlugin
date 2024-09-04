@@ -1,0 +1,17 @@
+public class TemplateGameState : ITemplateState
+{
+    public TemplateGameState()
+    {
+
+    }
+
+    public void Enter()
+    {
+
+    }
+
+    public void Exit()
+    {
+
+    }
+}
