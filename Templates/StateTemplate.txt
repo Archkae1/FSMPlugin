@@ -1,6 +1,6 @@
-public class TemplateGameState : ITemplateState
+public class TemplateFSMState : IFSMState
 {
-    public TemplateGameState()
+    public TemplateFSMState()
     {
 
     }

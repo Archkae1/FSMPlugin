@@ -1,20 +1,26 @@
-using System;
 using System.IO;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SelectionFSMPanel : CreatablePanel
+public class SelectionFSMPanel : CreateablePanel
 {
-    public static Action<string> stateButtonClicked;
-
+    private string _selectedFSMName;
     private readonly Vector2 _WinSize;
     private DirectoryInfo[] _FSMDirectories;
+
+    public string selectedFSMName { get { return _selectedFSMName; } }
 
     public SelectionFSMPanel(VisualElement utilityPanelRoot, Vector2 WinSize) : base(utilityPanelRoot)
     {
         _WinSize = WinSize;
         DirectoryInfo FSMMainDirectory = new DirectoryInfo(Application.dataPath + "/Scripts/Logic/FSM");
+        if (!FSMMainDirectory.Exists)
+        {
+            FSMMainDirectory.Create();
+            AssetDatabase.Refresh();
+        }
         _FSMDirectories = FSMMainDirectory.GetDirectories("*FSM");
         
         Create();
@@ -59,6 +65,7 @@ public class SelectionFSMPanel : CreatablePanel
     {
         listView.hierarchy.Clear();
         toolbarMenu.text = selectedName;
+        _selectedFSMName = selectedName;
         DirectoryInfo currentFSMDirectory = null;
 
         foreach (DirectoryInfo FSMDirectory in _FSMDirectories)
@@ -89,7 +96,6 @@ public class SelectionFSMPanel : CreatablePanel
             Button stateButton = new Button();
             stateButton.text = stateFile.Name;
             stateButton.style.fontSize = 13.5f;
-            stateButton.clicked += () => stateButtonClicked?.Invoke(stateButton.text);
 
             listView.hierarchy.Add(stateButton);
         }

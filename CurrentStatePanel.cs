@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CurrentStatePanel : CreatablePanel
+public class CurrentStatePanel : CreateablePanel
 {
     public CurrentStatePanel(VisualElement utilityPanelRoot) : base(utilityPanelRoot)
     {
@@ -16,7 +16,5 @@ public class CurrentStatePanel : CreatablePanel
     protected override void Create()
     {
 
-
-        SelectionFSMPanel.stateButtonClicked += OnStateButtonClicked;
     }
 }

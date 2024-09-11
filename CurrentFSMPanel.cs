@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CurrentFSMPanel : CreatablePanel
+public class CurrentFSMPanel : CreateablePanel
 {
     private SelectionFSMPanel _selectionFSMPanel;
     private CurrentStatePanel _currentStatePanel;
@@ -13,7 +13,7 @@ public class CurrentFSMPanel : CreatablePanel
 
         _selectionFSMPanel = new SelectionFSMPanel(utilityPanelRoot, WinSize);
         _currentStatePanel = new CurrentStatePanel(utilityPanelRoot);
-        _newStatePanel = new NewStatePanel(utilityPanelRoot);
+        _newStatePanel = new NewStatePanel(utilityPanelRoot, _selectionFSMPanel);
 
         _thisRoot.Add(_selectionFSMPanel.root);
         _thisRoot.Add(_currentStatePanel.root);

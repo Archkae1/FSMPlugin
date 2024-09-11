@@ -3,15 +3,15 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NewFSMPanel : CreatablePanel
+public class NewFSMPanel : CreateablePanel
 {
-    private readonly string _StateMachineTemplateText;
-    private readonly string _StateInterfaceTemplateText;
+    private readonly string _STATE_MACHINE_TEMPLATE_TEXT;
+    private readonly string _STATE_INTERFACE_TEMPLATE_TEXT;
 
     public NewFSMPanel(VisualElement utilityPanelRoot) : base(utilityPanelRoot)
     {
-        _StateMachineTemplateText = File.ReadAllText(Application.dataPath + "/Plugins/FSMModule/StateMachineTemplate.txt");
-        _StateInterfaceTemplateText = File.ReadAllText(Application.dataPath + "/Plugins/FSMModule/StateInterfaceTemplate.txt");
+        _STATE_MACHINE_TEMPLATE_TEXT = File.ReadAllText(Application.dataPath + "/Plugins/FSMPlugin/Templates/StateMachineTemplate.txt");
+        _STATE_INTERFACE_TEMPLATE_TEXT = File.ReadAllText(Application.dataPath + "/Plugins/FSMPlugin/Templates/StateInterfaceTemplate.txt");
         
         Create();
     }
@@ -80,8 +80,8 @@ public class NewFSMPanel : CreatablePanel
         File.WriteAllText(newStateInterface, "");
         File.WriteAllText(newStateMachineScript, "");
 
-        string stateMachineText = _StateMachineTemplateText.Replace("Template", value);
-        string stateInterfaceText = _StateInterfaceTemplateText.Replace("Template", value);
+        string stateMachineText = _STATE_MACHINE_TEMPLATE_TEXT.Replace("Template", value);
+        string stateInterfaceText = _STATE_INTERFACE_TEMPLATE_TEXT.Replace("Template", value);
 
         File.AppendAllText(newStateMachineScript, stateMachineText);
         File.AppendAllText(newStateInterface, stateInterfaceText);
